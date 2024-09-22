@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Post>
+
+<a class="btn btn-outline-dark" asp-controller="Post" asp-action="CreatePost">Create new</a>
+
+<h2>Posts</h2>
+<form asp-controller="Post" asp-action="Many">
+    <div class="d-flex flex-wrap">
+        @foreach (Post post in Model)
+        {
+            <div class="card card-body" style="width: 18rem; max-width: 320px">
+                <h5 class="card-title">@post.Title</h5>
+                @if (post.Likes > 0 || post.Dislikes > 0)
+                {
+                    <h6 class="card-subtitle mb-2 text-muted">@post.Likes likes | @post.Dislikes dislikes</h6>
+                }
+                <p class="card-text">@post.Annotation</p>
+
+                <button type="submit" name="id" class="btn btn-outline-dark" value="@post.Id">View</button>
+            </div>
+        }
+    </div>
+</form>

@@ -1,0 +1,42 @@
+﻿<div class="col-md-3">
+    <h2 class="title">@Model.User.Name</h2>
+    <h4 class="subtitle mb-2 text-muted">@Model.User.Email</h4>
+    <h5>@Model.User.Biography</h5>
+</div>
+<br />
+<div class="flex-row">
+    <form asp-controller="User" asp-action="One">
+        <h3 class="title">@(Model.User.Name)'s posts</h3>
+        <div class="d-flex flex-wrap">
+            @foreach (Post post in Model.Posts)
+            {
+                <div class="card card-body" style="width: 18rem; max-width: 320px">
+                    <h5 class="card-title">@post.Title</h5>
+                    @if (post.Likes > 0 || post.Dislikes > 0)
+                    {
+                        <h6 class="card-subtitle mb-2 text-muted">@post.Likes likes | @post.Dislikes dislikes</h6>
+                    }
+                    <p class="card-text">@post.Annotation</p>
+
+                    <button type="submit" name="id" class="btn btn-outline-dark" value="@post.Id">View</button>
+                </div>
+            }
+        </div>
+        <br />
+        <h3 class="title">@(Model.User.Name)'s comments</h3>
+        @foreach (Comment comment in Model.Comments)
+        {
+            <div class="card text-center">
+                <div class="card-header">
+                    <button type="submit" name="id" class="btn btn-outline-dark" value="@comment.PostId">View post</button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-subtitle">@comment.Text</h5>
+                </div>
+                <div class="card-footer text-muted">@comment.PublishDate.ToString("HH:mm dd.MM.yyyy")</div>
+            </div>
+        }
+    </form>
+</div>
+<br />
+<a class="btn btn-outline-dark" asp-controller="Account" asp-action="Logout">Logout</a>

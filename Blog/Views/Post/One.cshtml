@@ -1,0 +1,35 @@
+﻿@model Post
+
+<form asp-controller="Post" asp-action="One">
+    <div class="card text-center">
+        <div class="card-header">
+            <button type="submit" name="id" class="btn btn-outline-dark" value="@Model.AuthorId">@Model.Author.Name</button>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">@Model.Title</h4>
+            <button type="submit" asp-action="SetLike" name="id" class="btn btn-danger" value="@Model.Id">@Model.Likes likes</button>
+            <button type="submit" asp-action="SetDislike" name="id" class="btn btn-outline-secondary" value="@Model.Id">@Model.Dislikes dislikes</button>
+            <h5 class="card-subtitle">@Model.Annotation</h5>
+            <p class="card-text">@Model.Content</p>
+        </div>
+        <div class="card-footer text-muted">@Model.PublishDate</div>
+    </div>
+    <br />
+    <div class="text-center">
+        <a class="btn btn-outline-dark" asp-controller="Post" asp-action="CreateComment" asp-route-id="@Model.Id">Leave comment</a>
+    </div>
+    <br />
+    @foreach (Comment comment in Model.Comments)
+    {
+        <div class="card text-center">
+            <div class="card-header">
+                <button type="submit" name="id" class="btn btn-outline-dark" value="@comment.AuthorId">@comment.Author.Name</button>
+            </div>
+            <div class="card-body">
+                <h5 class="card-subtitle">@comment.Text</h5>
+            </div>
+            <div class="card-footer text-muted">@comment.PublishDate.ToString("HH:mm dd.MM.yyyy")</div>
+        </div>
+        <br />
+    }
+</form>

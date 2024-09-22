@@ -1,0 +1,17 @@
+﻿@model IEnumerable<User>
+
+<h2>Users</h2>
+<form asp-controller="User" asp-action="Many">
+    <div class="d-flex flex-wrap">
+        @foreach (User user in Model)
+        {
+            <div class="card card-body" style="width: 18rem; max-width: 320px">
+                <h4 class="card-title">@user.Name</h4>
+                <h6 class="card-subtitle mb-2 text-muted">@user.Email</h6>
+                <p class="card-text">@user.Biography</p>
+
+                <button type="submit" class="btn btn-outline-dark" name="id" value="@user.Id">View</button>
+            </div>
+        }
+    </div>
+</form>
